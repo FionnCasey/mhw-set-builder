@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background: #E7E7E7;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+h4 {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.txt-light {
+    font-size: 14px;
+    color: #6e7e87;
+    margin: 0;
+    padding: 0;
+}
+
+.bg-dark {
+    background: #243743;
+    color: #F2F3F8;
+}
+
+.bg-light {
+    background: #F2F3F8;
+    color: #243743;
+}
+
+.icon-sm {
+    width: 22px;
+    height: 22px;
+}
+
+.icon-md {
+    width: 32px;
+    height: 32px;
+}
+
+.icon-border-md {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 7px;
+    float: left;
+    border-radius: 50%;
+    border: 2px solid #243743;
+}
+
+.nav-links a {
+    color: #d6d4d4 !important;
+}
+
+.nav-links a:hover {
+    color: #ffffff !important;
+}
+
+.active a {
+    color: #243743 !important;
+}
+
+.active a:hover {
+    color: #243743 !important;
+}
+
+.light-card {
+    background: #ffffff;
+    color: #243743;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.glyph-dark {
+    color: white;
+    cursor: pointer;
+}
+
+.glyph-dark:hover {
+    color: #fbc76d;
+}
+
+.glyph-light {
+    color: #243743;
+    cursor: pointer;
+}
+
+.glyph-light:hover {
+    color: #fbc76d;
+}
+
+.icon-right {
+    float: right;
+    margin-left: 8px;
+    padding: 2px;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.float-right {
+    float: right;
+}
+
+.bold {
+    font-weight: bolder;
+    font-size: 14px;
+    margin: 0;
+}
+
+.sharp-left {
+    border-radius: 5px 0 0 5px;
+    padding: 0;
+    height: 15px;
+}
+
+.sharp-right {
+    border-radius: 0 5px 5px 0;
+    border: none;
+    padding: 0;
+    height: 15px;
+}
+
+.sharp {
+    border: none;
+    padding: 0;
+    height: 15px;
+}
+
+.scroll-y {
+    overflow-y: auto;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #243743;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #243743;
+}
+
+.hover-hl {
+    border: none;
+    margin: 1px;
+}
+
+.hover-hl:hover {
+    border: 1px solid #ffae00;
+}
+
+.selected {
+    border: 1px solid #f44f5a;
+}
