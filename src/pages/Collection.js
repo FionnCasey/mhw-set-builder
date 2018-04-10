@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Row, Col, ListGroup } from 'react-bootstrap';
 
 import CustomSet from '../store/sets.js';
-import { SetCard, SetPreview } from '../components/SetCards.js';
 import { BtnPrimary } from '../utils/customStyles.js';
+import SetDisplay from '../components/SetDisplay.js';
+import { SetListItem } from '../components/SetListItem.js';
 
 import { fetchData } from '../store/dummyDB.js';
 
@@ -12,8 +13,7 @@ export default class Collection extends Component {
 		super(props);
 		this.state = {
 			sets: props.user.sets,
-			activeIndex: -1,
-			hoverIndex: -1
+			activeIndex: -1
 		};
 	}
 
@@ -23,11 +23,6 @@ export default class Collection extends Component {
 
 	setActiveIndex = i => {
 		this.setState({ activeIndex: i });
-	};
-
-	setHoverIndex = i => {
-		this.setState({ hoverIndex: i });
-		console.log('hover ' + i);
 	};
 
 	createSet = () => {
@@ -49,21 +44,19 @@ export default class Collection extends Component {
 	};
 
 	editEquip = type => {
-		console.log(type);
+		console.log('edit ' + type);
 	};
 
 	render() {
 		const { activeIndex } = this.state;
 		const sets = this.state.sets.map((x, i) => {
 			return (
-				<SetPreview key={i} set={x}
+				<SetListItem key={i} set={x}
 					editEquip={this.editEquip}
-					skillDB={this.props.skillDB}
 					setActiveIndex={this.setActiveIndex}
 					index={i}
 					deleteSet={this.deleteSet}
 					activeIndex={activeIndex}
-					setHoverIndex={this.setHoverIndex}
 				/>
 			);
 		});
@@ -71,45 +64,53 @@ export default class Collection extends Component {
 		return(
 			<div>
 				<Row>
-					<Col xs={12} md={8}>
+					<Col xs={12} md={6}>
 						<h2>Collection</h2>
 					</Col>
-					<Col xs={6} md={4}>
+					<Col xs={12} md={6}>
 
 					</Col>
 				</Row>
 				<Row>
-					<Col xs={12} md={8}>
+					<Col xs={12} md={6}>
 						<div className="light-card">
 							<p style={{ display: 'inline-block', margin: 0, paddingLeft: 5 }}>
 								{sets.length === 1 ? '1 set in collection.' : sets.length + ' sets in collection.'}
 							</p>
 							{BtnPrimary('Create Set', this.createSet, 'xsmall')}
 						</div>
-						{
-							activeIndex > -1 ?
-								<SetCard
-									set={this.props.user.sets[activeIndex]}
-									editEquip={this.editEquip}
-									skillDB={this.props.skillDB}
-									setActiveIndex={this.setActiveIndex}
-								/>
-								: null
-						}
 						<ListGroup
 							className="scroll-y"
 							style={{
 								borderRadius: 5,
 								marginTop: 10,
-								maxHeight: '60vh'
+								maxHeight: 425,
+								direction: 'rtl'
 							}}
 						>
 							{sets}
 						</ListGroup>
 					</Col>
-					<Col xs={6} md={4}>
+					<Col xs={12} md={6}>
 						{
-							activeIndex > -1 ? <div className="light-card">Detailed View</div> : null
+							activeIndex > -1 ?
+								<SetDisplay
+									set={this.props.user.sets[activeIndex]}
+									editEquip={this.editEquip}
+									setActiveIndex={this.setActiveIndex}
+								/>
+								:
+								<div
+									style={{
+										minHeight: '60vh',
+										textAlign: 'center',
+										border: '1px solid #243743',
+										borderRadius: 5,
+										background: '#E7E7E7'
+									}}
+								>
+									Select a set to edit.
+								</div>
 						}
 					</Col>
 				</Row>

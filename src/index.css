@@ -162,9 +162,12 @@ h4 {
 }
 
 .hover-hl:hover {
-    border: 1px solid #ffae00;
+    border-left: 2px solid #ffae00;
+    border-right: 2px solid #ffae00;
+    border-radius: 0 !important;
 }
 
 .selected {
     border: 1px solid #f44f5a;
+    border-radius: 0 !important;
 }

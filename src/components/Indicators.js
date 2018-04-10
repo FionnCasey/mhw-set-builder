@@ -26,7 +26,7 @@ const SkillLevels = ({ name, lvl, maxLvl }) => {
 const SharpnessBar = ({ weapon }) => {
 	let total = 0;
 	let red, orange, yellow, green, blue, white = null;
-	const scale = 1.5;
+	const scale = 1.2;
 
 	if (weapon.attributes.sharpnessRed) {
 		total += weapon.attributes.sharpnessRed;

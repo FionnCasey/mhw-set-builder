@@ -1,5 +1,5 @@
 export default class CustomSet {
-	constructor(count) {
+	constructor(count = '') {
 		this.equipment = {
 			weapon: null,
 			head: null,
@@ -47,7 +47,7 @@ export default class CustomSet {
 		return slots;
 	}
 
-	static createSetFromData(data, count) {
+	static createSetFromData(data, count = '') {
 		let set = new CustomSet(count);
 		set.equipment.weapon = data.weapon;
 		set.equipment.head = data.head;

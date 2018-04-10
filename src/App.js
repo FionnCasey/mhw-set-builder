@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid } from 'react-bootstrap';
 import { BrowserRouter, Route } from 'react-router-dom';
 
+import { loadEquipment } from './store/db.js';
 import MainNav from './components/MainNav.js';
 import Collection from './pages/Collection.js';
 
@@ -16,41 +17,17 @@ class App extends Component {
                 sets: [],
                 loggedIn: false
             },
-            skillDB: null
+            dbLoaded: false
         };
     }
 
-    componentDidMount() {
-        this.getSkillInfo();
-    }
-
-    getSkillInfo() {
-        if (!this.state.skillDB) {
-            let skillDB = [];
-            fetch('https://mhw-db.com/skills')
-    		.then(res => {
-    			if (res.ok) return res.json();
-    			throw new Error('Request failed.');
-    		})
-    		.then(results => {
-                results.forEach(x => {
-                   skillDB.push({
-                       id: x.ranks[0].skill,
-                       name: x.name,
-                       ranks: x.ranks
-                   });
-                });
-                this.setState({ skillDB });
-    		})
-    		.catch(err => {
-    			console.log(err);
-    		});
-        }
+    componentWillMount() {
+        if (!this.state.dbLoaded) loadEquipment(() => this.setState({ dbLoaded: true }));
     }
 
     userLogin = user => {
         this.setState({ user });
-    }
+    };
 
     render() {
         return (
@@ -59,7 +36,7 @@ class App extends Component {
                     <MainNav />
                     <Grid>
                         <Route path="/collection" component={() =>
-                            <Collection user={this.state.user} skillDB={this.state.skillDB}/>
+                            <Collection user={this.state.user} />
                         }/>
                     </Grid>
                 </div>
