@@ -8,7 +8,12 @@ const BtnPrimary = (text, onClick, size = 'small') => (
 	<div style={{ display: 'inline-block', float: 'right' }}>
 	    <style type="text/css">{`
 	    .btn-primary {
-	        background-color: purple;
+	        background-color: #f44f5a !important;
+	        color: white;
+			border: none;
+	    }
+		.btn-primary:hover {
+	        background-color: #f44f5a;
 	        color: white;
 	    }
 	    `}</style>

@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Row, Col, ListGroup } from 'react-bootstrap';
 
 import CustomSet from '../store/sets.js';
-import { BtnPrimary } from '../utils/customStyles.js';
 import SetDisplay from '../components/SetDisplay.js';
-import { SetListItem } from '../components/SetListItem.js';
+import TabView from '../components/TabView.js';
+import SearchPanel from '../components/Search.js';
+import { SetListView } from '../components/SetListView.js';
 
 import { fetchData } from '../store/dummyDB.js';
 
@@ -13,7 +14,9 @@ export default class Collection extends Component {
 		super(props);
 		this.state = {
 			sets: props.user.sets,
-			activeIndex: -1
+			activeIndex: -1,
+			showSearch: false,
+			searchType: ''
 		};
 	}
 
@@ -40,29 +43,27 @@ export default class Collection extends Component {
 	deleteSet = i => {
 		const { sets } = this.props.user;
 		sets.splice(i, 1);
-		this.setState({ sets });
+		const activeIndex = this.state.activeIndex >= sets.length ? sets.length - 1 : this.setActiveIndex;
+		this.setState({ sets, activeIndex });
 	};
 
 	editEquip = type => {
-		console.log('edit ' + type);
+		this.setState({ showSearch: true, searchType: type });
 	};
 
+
 	render() {
-		const { activeIndex } = this.state;
-		const sets = this.state.sets.map((x, i) => {
-			return (
-				<SetListItem key={i} set={x}
-					editEquip={this.editEquip}
-					setActiveIndex={this.setActiveIndex}
-					index={i}
-					deleteSet={this.deleteSet}
-					activeIndex={activeIndex}
-				/>
-			);
-		});
+		const { activeIndex, sets } = this.state;
+		let hideSearch = () => this.setState({ showSearch: false, searchType: '' });
 
 		return(
 			<div>
+				<SearchPanel
+					show={this.state.showSearch}
+					onHide={hideSearch}
+					type={this.state.searchType}
+					activeset={this.state.sets[activeIndex]}
+				/>
 				<Row>
 					<Col xs={12} md={6}>
 						<h2>Collection</h2>
@@ -72,24 +73,14 @@ export default class Collection extends Component {
 					</Col>
 				</Row>
 				<Row>
-					<Col xs={12} md={6}>
-						<div className="light-card">
-							<p style={{ display: 'inline-block', margin: 0, paddingLeft: 5 }}>
-								{sets.length === 1 ? '1 set in collection.' : sets.length + ' sets in collection.'}
-							</p>
-							{BtnPrimary('Create Set', this.createSet, 'xsmall')}
-						</div>
-						<ListGroup
-							className="scroll-y"
-							style={{
-								borderRadius: 5,
-								marginTop: 10,
-								maxHeight: 425,
-								direction: 'rtl'
-							}}
-						>
-							{sets}
-						</ListGroup>
+					<Col xs={12} md={3}>
+						<SetListView
+							sets={sets}
+							deleteSet={this.deleteSet}
+							createSet={this.createSet}
+							activeIndex={activeIndex}
+							setActiveIndex={this.setActiveIndex}
+						/>
 					</Col>
 					<Col xs={12} md={6}>
 						{
@@ -100,18 +91,28 @@ export default class Collection extends Component {
 									setActiveIndex={this.setActiveIndex}
 								/>
 								:
-								<div
-									style={{
-										minHeight: '60vh',
-										textAlign: 'center',
-										border: '1px solid #243743',
-										borderRadius: 5,
-										background: '#E7E7E7'
-									}}
-								>
-									Select a set to edit.
+								<div style={{
+									height: 425,
+									textAlign: 'center',
+									paddingTop: 100,
+									color: '#4f4f4f'
+								}}>
+									<h4>Select a set or create a new one.</h4>
 								</div>
 						}
+					</Col>
+					<Col xs={12} md={3}>
+					{
+						activeIndex > -1 ?
+						<TabView
+							sets={sets}
+							deleteSet={this.deleteSet}
+							createSet={this.createSet}
+							activeIndex={activeIndex}
+							setActiveIndex={this.setActiveIndex}
+						/> :
+						null
+					}
 					</Col>
 				</Row>
 			</div>

@@ -42,6 +42,10 @@ export default class CustomSet {
 		}
 	}
 
+	changeEquipment(type, equip) {
+		this.equipment[type] = equip;
+	}
+
 	getSlots() {
 		let slots = [];
 		return slots;

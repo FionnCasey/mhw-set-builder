@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 export default class MainNav extends Component {
 	render() {
 		return(
-			<Navbar staticTop collapseOnSelect className="bg-dark">
+			<Navbar staticTop collapseOnSelect className="bg-dark" style={{ height: '100%' }}>
 				<Navbar.Header>
 					<Navbar.Brand>
 						<Image src="/icons/logo.png" responsive className="icon-md"

@@ -3,6 +3,7 @@ import { Glyphicon } from 'react-bootstrap';
 
 const SkillLevels = ({ name, lvl, maxLvl }) => {
 	let icons = [];
+	lvl = lvl > maxLvl ? maxLvl : lvl;
 	for (let i = 0; i < maxLvl; i++) {
 		icons[i] = i < lvl ?
 			<li key={i} className="inline-block">

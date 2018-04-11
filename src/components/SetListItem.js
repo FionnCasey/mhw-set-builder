@@ -7,11 +7,11 @@ const SetListItem = ({ set, index, activeIndex, setActiveIndex, deleteSet }) => 
 	const className = index === activeIndex ? 'hover-hl selected' : 'hover-hl';
 
 	return (
-		<ListGroupItem
-			style={{ padding: 0, minHeight: 35, direction: 'ltr' }}
+		<ListGroupItem onClick={() => setActiveIndex(index)}
+			style={{ borderRadius: 0, padding: 0, minHeight: 35, direction: 'ltr' }}
 			className={className}
 		>
-			<div style={{ borderRadius: 5, padding: 7}}>
+			<div style={{ padding: 7, borderRadius: 0}}>
 				{
 					set.equipment.weapon ?
 						<Image
@@ -26,13 +26,9 @@ const SetListItem = ({ set, index, activeIndex, setActiveIndex, deleteSet }) => 
 				}
 				{set.name}
 				<Glyphicon glyph="trash"
-					onClick={() => deleteSet(index)}
+					onClick={(e) => {e.stopPropagation(); deleteSet(index)}}
 					className="glyph-light icon-right"
 					style={{ marginRight: 2 }}
-				/>
-				<Glyphicon glyph="wrench"
-					onClick={() => setActiveIndex(index)}
-					className="glyph-light icon-right"
 				/>
 			</div>
 		</ListGroupItem>

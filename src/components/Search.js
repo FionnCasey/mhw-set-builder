@@ -3,7 +3,7 @@ import { FormGroup, HelpBlock, Button, Modal, ControlLabel, Col, Row, Image } fr
 import Autocomplete from 'react-autocomplete';
 
 import { titleCase } from '../utils/parser.js';
-import { EquipmentCard, WeaponCard } from './SetCards.js';
+import { ArmourDisplay, WeaponDisplay } from './EquipmentDisplay.js';
 import { getArmourIcon, getWeaponIcon } from '../utils/imagePaths.js';
 
 export default class SearchPanel extends Component {
@@ -54,11 +54,21 @@ export default class SearchPanel extends Component {
 		this.search();
 	};
 
+	changeEquipment = (type, equip) => {
+		this.props.activeset.changeEquipment(type, equip);
+		this.props.onHide();
+	};
+
 	render() {
 		const { nameFilter, skillFilters, results } = this.state;
 
 		const resultsView = results.map((r, i) => {
-			return <EquipmentCard key={i} armour={r} placeholder={false}/>
+			return (
+				<ArmourDisplay key={i} armour={r}
+					type={r.type}
+					edit={this.changeEquipment}
+				/>
+			);
 		});
 
 		return (
@@ -87,7 +97,7 @@ export default class SearchPanel extends Component {
 								</Col>
 								<Col xs={6} md={4}>
 
-									Attack Boost, Artillery
+									Required Skills:
 								</Col>
 
 								<Col xs={6} md={4}>

@@ -13,7 +13,6 @@ const WeaponDisplay = ({ weapon, edit }) => {
 		const name = weapon.name.replace('1', 'I')
 			.replace('2', 'II')
 			.replace('3', 'III');
-			console.log(weapon);
 
 		const affinity = weapon.attributes.affinity ? weapon.attributes.affinity : 0;
 		const element = weapon.attributes.elementDamage ? weapon.attributes.elementDamage : 'None';
@@ -56,7 +55,9 @@ const WeaponDisplay = ({ weapon, edit }) => {
 					<Image src={getWeaponIcon('greatsword')} className="icon-md" />
 				</div>
 				<p style={{
-					display: 'inline-block'
+					display: 'inline-block',
+					float: 'right',
+					marginRight: '36%'
 				}}>
 					Click to add weapon.
 				</p>
@@ -77,7 +78,7 @@ const ArmourDisplay = ({ armour, type, edit }) => {
 		const bgColour = rarityColours[armour.rarity];
 
 		return (
-			<ListGroupItem style={{ paddingBottom: 5 }} onClick={() => edit}>
+			<ListGroupItem style={{ paddingBottom: 5 }} onClick={() => edit(type, armour)}>
 				<div className="icon-border-md" style={{ background: bgColour, marginLeft: -5, marginTop: -5 }}>
 					<Image src={getArmourIcon(type)} className="icon-md" />
 				</div>
@@ -96,7 +97,13 @@ const ArmourDisplay = ({ armour, type, edit }) => {
 				<div className="icon-border-md" style={{ marginLeft: -5, marginTop: -5 }}>
 					<Image src={getArmourIcon(type)} className="icon-md" />
 				</div>
-				<p style={{ display: 'inline-block' }}>Click to add equipment.</p>
+				<p style={{
+					display: 'inline-block',
+					float: 'right',
+					marginRight: '33%'
+				}}>
+					Click to add equipment.
+				</p>
 			</ListGroupItem>
 		);
 	}
