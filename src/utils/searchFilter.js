@@ -1,4 +1,4 @@
-import { db } from '../store/db.js';
+import { db, getArmourType } from '../store/db.js';
 
 const filterArmourBySkills = required => {
     let results = [];
@@ -10,4 +10,12 @@ const filterArmourBySkills = required => {
     return results;
 };
 
-export { filterArmourBySkills };
+const filterListByName = (list, name, armourType = '') => {
+    if (armourType !== '') {
+        return getArmourType(armourType).filter(x => x.name.toLowerCase().indexOf(name.toLowerCase()) > -1);
+    }
+    return list.filter(x => x.name.toLowerCase().indexOf(name.toLowerCase()) > -1);
+};
+
+
+export { filterArmourBySkills, filterListByName };

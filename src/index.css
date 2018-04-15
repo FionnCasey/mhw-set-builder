@@ -225,3 +225,35 @@ h4 {
     background: white;
     color: #f44f5a !important;
 }
+
+.textinput-basic {
+    width: 200px;
+    height: 20px;
+    border: none;
+    display: inline-block;
+}
+
+.input-container {
+    display: inline-block;
+}
+
+.search-title {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.autocomplete-item {
+    padding: 5px;
+}
+
+.autocomplete {
+    position: absolute;
+    width: 100%;
+    border-radius: 5px;
+    z-index: 9;
+}
+
+.text-input {
+    height: 28px;
+    color: gray;
+}

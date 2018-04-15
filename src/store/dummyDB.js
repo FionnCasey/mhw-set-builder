@@ -113,4 +113,8 @@ const fetchData = onDone => {
 	});
 };
 
-export { fetchData };
+const userDb = [
+	{ name: 'fionn', password: 'pass' }
+];
+
+export { fetchData, userDb };

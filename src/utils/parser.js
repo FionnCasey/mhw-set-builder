@@ -19,4 +19,6 @@ const titleCase = str => {
 	}).join(' ');
 };
 
-export { parseSkills, titleCase };
+const parseArmourName = name => name.replace('Alpha', '\u03B1').replace('Beta', '\u03B2');
+
+export { parseSkills, titleCase, parseArmourName };

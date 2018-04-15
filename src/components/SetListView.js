@@ -16,7 +16,7 @@ const SetListView = ({ sets, createSet, deleteSet, activeIndex, setActiveIndex }
         );
     });
     return (
-        <div style={{ background: 'white', border: '1px solid  #243743', borderRadius: 5 }}>
+        <div style={{ background: 'white', border: '1px solid  #243743', borderRadius: 5, marginBottom: 15 }}>
         <div style={{ border: 'none', borderRadius: 0,
             borderBottom: '1px solid #243743',
             padding: '8px 10px 8px 10px'

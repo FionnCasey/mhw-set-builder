@@ -4,6 +4,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 export default class MainNav extends Component {
 	render() {
+		const { loggedIn } = this.props.user;
+
 		return(
 			<Navbar staticTop collapseOnSelect className="bg-dark" style={{ height: '100%' }}>
 				<Navbar.Header>
@@ -17,15 +19,15 @@ export default class MainNav extends Component {
 				</Navbar.Header>
 				<Navbar.Collapse>
 					<Nav pullRight className="nav-links">
-						<LinkContainer to="/browse">
-							<NavItem>Browse</NavItem>
-						</LinkContainer>
 						<LinkContainer to="/generate">
 							<NavItem>Generate</NavItem>
 						</LinkContainer>
 						<LinkContainer to="/collection">
 							<NavItem>Collection</NavItem>
 						</LinkContainer>
+						{
+							loggedIn ? <NavItem>Logout</NavItem> : <NavItem>Login</NavItem>
+						}
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>

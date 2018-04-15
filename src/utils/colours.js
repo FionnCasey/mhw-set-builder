@@ -1,7 +1,7 @@
 const rarityColours = [
-		'#ffffff',
-		'#ffffff',
-		'#ffffff',
+		'lightgray',
+		'lightgray',
+		'lightgray',
 		'#00a056',
 		'#00A1D4',
 		'#363587',

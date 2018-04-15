@@ -4,7 +4,7 @@ import { Row, Col, ListGroup } from 'react-bootstrap';
 import CustomSet from '../store/sets.js';
 import SetDisplay from '../components/SetDisplay.js';
 import TabView from '../components/TabView.js';
-import SearchPanel from '../components/Search.js';
+import SearchModal from '../components/SearchModal.js';
 import { SetListView } from '../components/SetListView.js';
 
 import { fetchData } from '../store/dummyDB.js';
@@ -23,6 +23,10 @@ export default class Collection extends Component {
 	componentDidMount() {
 		if (this.props.user.sets.length === 0) fetchData(this.addSet);
 	}
+
+	changeSetName = name => {
+		this.state.sets[this.state.activeIndex].changeName(name);
+	};
 
 	setActiveIndex = i => {
 		this.setState({ activeIndex: i });
@@ -58,7 +62,7 @@ export default class Collection extends Component {
 
 		return(
 			<div>
-				<SearchPanel
+				<SearchModal
 					show={this.state.showSearch}
 					onHide={hideSearch}
 					type={this.state.searchType}
@@ -87,6 +91,7 @@ export default class Collection extends Component {
 							activeIndex > -1 ?
 								<SetDisplay
 									set={this.props.user.sets[activeIndex]}
+									editName={this.changeSetName}
 									editEquip={this.editEquip}
 									setActiveIndex={this.setActiveIndex}
 								/>

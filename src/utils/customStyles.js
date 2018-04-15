@@ -1,25 +1,69 @@
-import { Button } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 import { bootstrapUtils } from 'react-bootstrap/lib/utils';
 import React from 'react';
 
 bootstrapUtils.addStyle(Button, 'primary');
+bootstrapUtils.addStyle(Button, 'secondary');
+bootstrapUtils.addStyle(Button, 'glyph');
 
-const BtnPrimary = (text, onClick, size = 'small') => (
-	<div style={{ display: 'inline-block', float: 'right' }}>
+const BtnPrimary = (text, onClick, size = 'small', float = 'right') => (
+	<div style={{ display: 'inline-block', float: float }}>
 	    <style type="text/css">{`
 	    .btn-primary {
 	        background-color: #f44f5a !important;
 	        color: white;
 			border: none;
+			min-width: 60px;
 	    }
 		.btn-primary:hover {
 	        background-color: #f44f5a;
 	        color: white;
 	    }
 	    `}</style>
-	    <Button onClick={() => onClick()} bsSize={size} bsStyle="primary">{text}</Button>
+	    <Button onClick={(e) => {e.preventDefault(); onClick()}} bsSize={size} bsStyle="primary">{text}</Button>
   	</div>
 );
 
+const BtnSecondary = (text, onClick, size = 'small', float = 'right') => (
+	<div style={{ display: 'inline-block', float: float }}>
+	    <style type="text/css">{`
+	    .btn-secondary {
+	        background-color: #ffae00 !important;
+	        color: white;
+			border: none;
+			min-width: 60px;
+	    }
+		.btn-secondary:hover {
+	        background-color: #ffae00;
+	        color: white;
+	    }
+	    `}</style>
+	    <Button onClick={(e) => {e.preventDefault(); onClick()}} bsSize={size} bsStyle="secondary">{text}</Button>
+  	</div>
+);
 
-export { BtnPrimary };
+const BtnGlyph = (glyph, onClick, text = '', size = 'xsmall', float = 'none') => (
+	<div style={{ display: 'inline-block', float: float }}>
+	    <style type="text/css">{`
+	    .btn-glyph {
+	        background-color: #ffae00 !important;
+	        color: white;
+			border: none;
+			border-radius: 50%;
+			width: 20px;
+			height: 20px;
+			padding: 0;
+	    }
+		.btn-glyph:hover {
+	        background-color: #ffae00;
+	        color: white;
+	    }
+	    `}</style>
+		<Button onClick={() => onClick()} bsSize={size} bsStyle="glyph">
+			{text}
+			<Glyphicon glyph={glyph} style={{ color: 'white', padding: 0 }}/>
+		</Button>
+  	</div>
+);
+
+export { BtnPrimary, BtnSecondary, BtnGlyph };

@@ -33,7 +33,7 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div>
-                    <MainNav />
+                    <MainNav user={this.state.user} />
                     <Grid>
                         <Route path="/collection" component={() =>
                             <Collection user={this.state.user} />

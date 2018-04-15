@@ -1,3 +1,5 @@
+import { getSkillMaxLevel } from './db.js';
+
 export default class CustomSet {
 	constructor(count = '') {
 		this.equipment = {
@@ -15,7 +17,7 @@ export default class CustomSet {
 	}
 
 	updateSkills() {
-		this.skills = [];
+		let skills = [];
 		let keys = [];
 		for (var key in this.equipment) {
 			if (this.equipment.hasOwnProperty(key)) keys.push(key);
@@ -26,24 +28,41 @@ export default class CustomSet {
 
 			this.equipment[keys[i]].skills.forEach(skill => {
 				const name = skill.slug.substring(0, skill.slug.length - 7).split('-').join(' ');
-				const i = this.skills.findIndex(e => e.name === name);
+				const i = skills.findIndex(e => e.name === name);
 
 				if (i > -1) {
-					this.skills[i].level += parseInt(skill.level, 10);
+					skills[i].level += parseInt(skill.level, 10);
 				}
 				else {
-					this.skills.push({
+					skills.push({
 						id: skill.skill,
 						name,
 						level: parseInt(skill.level, 10),
+						maxLvl: getSkillMaxLevel(skill.skill)
 					 });
 				}
 			});
 		}
+		this.skills = skills.sort((a, b) => {
+			if (a.level === b.level) {
+				if (a.level === a.maxLevel || a.maxLvl >= b.maxLvl) {
+					return -1;
+				}
+				return 1;
+			}
+			else if (a.level >= b.level) {
+				return -1;
+			}
+			return 1;
+		});
 	}
 
 	changeEquipment(type, equip) {
 		this.equipment[type] = equip;
+	}
+
+	changeName(name) {
+		this.name = name;
 	}
 
 	getSlots() {

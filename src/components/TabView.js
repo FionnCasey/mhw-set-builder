@@ -26,14 +26,16 @@ export default class TabView extends Component {
                 id="tab-controller"
                 style={{
                     background: 'white',
-                    borderRadius: 5
+                    borderRadius: 5,
+                    width: 300,
+                    padding: 5
                 }}
             >
-                <Tab eventKey={1} title="Set Details">
+                <Tab eventKey={1} title="Skills">
                     <SkillList set={sets[activeIndex]} />
                 </Tab>
-                <Tab eventKey={2} title="Equipment Search">
-                    Search
+                <Tab eventKey={2} title="Stats">
+                    Stats Tab
                 </Tab>
             </Tabs>
         );

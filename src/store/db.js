@@ -12,6 +12,27 @@ const checkDones = () => (
 	db.skills !== null
 );
 
+const getDbCategory = type => {
+	switch(type) {
+		case 'weapon':
+		return db.weapons;
+
+		case 'charm':
+		return db.charms;
+
+		default:
+		return db.armour;
+	}
+};
+
+const getSkillMaxLevel = id => db.skills.find(s => s.id === id).ranks.length;
+
+const getSkillByName = name => db.skills.find(s => s.name.toLowerCase() === name.toLowerCase());
+
+const getArmourType = type => {
+	return db.armour.filter(x => x.type.toLowerCase() === type.toLowerCase());
+};
+
 const loadEquipment = onDone => {
 	fetchData('weapons', (results) => {
 		db.weapons = results;
@@ -56,4 +77,4 @@ const fetchData = (endpoint, onDone) => {
 	});
 };
 
-export { db, loadEquipment };
+export { db, loadEquipment, getDbCategory, getArmourType, getSkillMaxLevel, getSkillByName };

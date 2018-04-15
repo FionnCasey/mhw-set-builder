@@ -7,7 +7,7 @@ const SkillLevels = ({ name, lvl, maxLvl }) => {
 	for (let i = 0; i < maxLvl; i++) {
 		icons[i] = i < lvl ?
 			<li key={i} className="inline-block">
-				<Glyphicon glyph="stop" style={{ color: 'orange '}}/>
+				<Glyphicon glyph="stop" style={{ color: '#ffae00 '}}/>
 			</li> :
 			<li key={i} className="inline-block">
 				<Glyphicon glyph="stop" style={{ color: 'lightgray '}}/>

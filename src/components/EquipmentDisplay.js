@@ -20,7 +20,7 @@ const WeaponDisplay = ({ weapon, edit }) => {
 		return (
 			<ListGroupItem
 				style={{ paddingBottom: 5 }}
-				onClick={() => edit()}
+				onClick={() => edit('weapon', weapon)}
 			>
 				<div className="icon-border-md"
 					style={{
@@ -30,10 +30,10 @@ const WeaponDisplay = ({ weapon, edit }) => {
 					}}>
 					<Image src={getWeaponIcon(weapon.type)} className="icon-md" />
 				</div>
-				<div style={{ display: 'inline-block', paddingLeft: 15, paddingTop: 15, float: 'left' }}>
+				<div style={{ display: 'inline-block', paddingLeft: 15, paddingTop: 15, float: 'left', width: 200 }}>
 					<h4>{name}</h4>
 				</div>
-				<ul style={{ display: 'inline-block', marginLeft: 73, fontSize: 12 }}>
+				<ul style={{ display: 'inline-block', fontSize: 12 }}>
 					<li>Attack: {weapon.attributes.attack}</li>
 					<li>Element: {element}</li>
 					<li>Affinity: {affinity}%</li>
@@ -46,7 +46,7 @@ const WeaponDisplay = ({ weapon, edit }) => {
 	}
 	else {
 		return (
-			<ListGroupItem onClick={() => edit()}>
+			<ListGroupItem onClick={() => edit('weapon')}>
 				<div className="icon-border-md"
 					style={{
 						marginLeft: -5,
