@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, HelpBlock, Button, Modal, ControlLabel, Col, Row, Image } from 'react-bootstrap';
+import { FormGroup, HelpBlock, Modal, Col, Row, Image } from 'react-bootstrap';
 
 import { titleCase } from '../utils/parser.js';
 import { ArmourDisplay, WeaponDisplay } from './EquipmentDisplay.js';
@@ -9,6 +9,7 @@ import AutoComplete from './AutoComplete.js'
 import { filterListByName } from '../utils/searchFilter.js';
 import { BtnPrimary, BtnSecondary } from '../utils/customStyles.js';
 import SkillFilter from './SkillFilters.js';
+import { WeaponDropdown } from './WeaponDropdown.js';
 
 export default class SearchPanel extends Component {
 	constructor() {
@@ -17,6 +18,7 @@ export default class SearchPanel extends Component {
 			message: '',
 			nameFilter: '',
 			skillFilters: [],
+			weaponCategory: 'all',
 			results: [],
 			maxResults: 50
 		};
@@ -58,11 +60,20 @@ export default class SearchPanel extends Component {
 			matches = filteredResults.length;
 			filteredResults.slice(0, this.state.maxResults);
 		}
+		else if (this.props.type === 'weapon' && this.state.weaponCategory !== 'all') {
+			filteredResults = results.filter(r => r.type === this.state.weaponCategory);
+			matches = filteredResults.length;
+			filteredResults.slice(0, this.state.maxResults);
+		}
 
 		const message = matches > this.state.maxResults ?
 			`Showing ${this.state.maxResults} of ${matches} matches found.` : `${matches} matches found.`;
 
 		this.setState({ results: filteredResults, message });
+	};
+
+	selectWeaponType = type => {
+		this.setState({ weaponCategory: type });
 	};
 
 	startSearch = e => {
@@ -123,11 +134,19 @@ export default class SearchPanel extends Component {
 									/>
 								</Col>
 								<Col xs={6} md={4}>
-									<SkillFilter
-										filters={skillFilters}
-										addFilter={this.addFilter}
-										removeFilter={this.removeFilter}
-									/>
+									{
+										type === 'weapon' ?
+											<WeaponDropdown
+												select={this.selectWeaponType}
+												current={this.state.weaponCategory}
+											/>
+											:
+											<SkillFilter
+												filters={skillFilters}
+												addFilter={this.addFilter}
+												removeFilter={this.removeFilter}
+											/>
+									}
 								</Col>
 
 								<Col xs={6} md={4} style={{ paddingTop: 22 }}>

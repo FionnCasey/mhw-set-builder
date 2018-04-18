@@ -1,40 +1,36 @@
 import React, { Component } from 'react';
-import { Row, Col, ListGroup } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import CustomSet from '../store/sets.js';
 import SetDisplay from '../components/SetDisplay.js';
-import TabView from '../components/TabView.js';
+import { SkillList } from '../components/SetDetails.js';
 import SearchModal from '../components/SearchModal.js';
 import { SetListView } from '../components/SetListView.js';
-
-import { fetchData } from '../store/dummyDB.js';
 
 export default class Collection extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			sets: props.user.sets,
-			activeIndex: -1,
+			activeIndex: this.props.activeIndex,
 			showSearch: false,
 			searchType: ''
 		};
 	}
 
-	componentDidMount() {
-		if (this.props.user.sets.length === 0) fetchData(this.addSet);
-	}
-
 	changeSetName = name => {
-		this.state.sets[this.state.activeIndex].changeName(name);
+		const sets = this.state.sets;
+		sets[this.state.activeIndex].changeName(name);
+		this.setState({ sets });
 	};
 
 	setActiveIndex = i => {
-		this.setState({ activeIndex: i });
+		this.props.setActiveIndex(i);
 	};
 
 	createSet = () => {
-		this.props.user.sets.unshift(new CustomSet(this.props.user.sets.length));
-		this.setState({ activeIndex: 0 });
+		let set = new CustomSet(this.state.sets.length);
+		this.props.addSet(set);
 	};
 
 	addSet = data => {
@@ -94,6 +90,8 @@ export default class Collection extends Component {
 									editName={this.changeSetName}
 									editEquip={this.editEquip}
 									setActiveIndex={this.setActiveIndex}
+									deleteSet={this.deleteSet}
+									index={activeIndex}
 								/>
 								:
 								<div style={{
@@ -109,12 +107,8 @@ export default class Collection extends Component {
 					<Col xs={12} md={3}>
 					{
 						activeIndex > -1 ?
-						<TabView
-							sets={sets}
-							deleteSet={this.deleteSet}
-							createSet={this.createSet}
-							activeIndex={activeIndex}
-							setActiveIndex={this.setActiveIndex}
+						<SkillList
+							set={sets[activeIndex]}
 						/> :
 						null
 					}

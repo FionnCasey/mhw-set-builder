@@ -35,7 +35,7 @@ export default class SetDisplay extends Component {
 		if (!this.props.set) return null;
 
 		const { weapon, head, chest, gloves, waist, legs, charm } = this.props.set.equipment;
-		const { setActiveIndex, editEquip, set } = this.props;
+		const { setActiveIndex, editEquip, set, deleteSet, index } = this.props;
 
 		const nameText = this.state.editName ?
 			<form onSubmit={this.handleSubmit} className="input-container">
@@ -62,7 +62,7 @@ export default class SetDisplay extends Component {
 						style={{ margin: '-5px 10px 0px 0px', padding: 0 }}
 					/>
 					{nameText}
-					<Glyphicon glyph="trash" onClick={() => console.log('delete set')} className="glyph-dark icon-right" style={{ marginRight: 2 }}/>
+					<Glyphicon glyph="trash" onClick={() => deleteSet(index)} className="glyph-dark icon-right" style={{ marginRight: 2 }}/>
 					<Glyphicon glyph="remove" onClick={() => setActiveIndex(-1)} className="glyph-dark icon-right"/>
 					<Glyphicon glyph="pencil" onClick={() => editBtn()} className="glyph-dark icon-right"/>
 				</div>

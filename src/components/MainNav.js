@@ -2,9 +2,23 @@ import React, { Component } from 'react';
 import { Navbar, NavItem, Nav, Image } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
+import Login from './Login.js';
+
 export default class MainNav extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			loginOpen: false
+		};
+	}
+
+	openLogin = () => {
+		this.setState({ loginOpen: true });
+	}
+
 	render() {
-		const { loggedIn } = this.props.user;
+		const { user, logout, login } = this.props;
+		let closeLogin = () => this.setState({ loginOpen: false });
 
 		return(
 			<Navbar staticTop collapseOnSelect className="bg-dark" style={{ height: '100%' }}>
@@ -26,10 +40,20 @@ export default class MainNav extends Component {
 							<NavItem>Collection</NavItem>
 						</LinkContainer>
 						{
-							loggedIn ? <NavItem>Logout</NavItem> : <NavItem>Login</NavItem>
+							user.loggedIn ?
+								<NavItem onClick={() => logout()}>
+									Logout
+								</NavItem> :
+								<NavItem onClick={() => this.openLogin()}>Login</NavItem>
 						}
 					</Nav>
 				</Navbar.Collapse>
+				<Login
+					show={this.state.loginOpen}
+					onHide={closeLogin}
+					login={login}
+					user={user}
+				/>
 			</Navbar>
 		);
 	}

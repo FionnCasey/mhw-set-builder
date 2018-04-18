@@ -1,4 +1,4 @@
-import { getSkillMaxLevel } from './db.js';
+import { db, getSkillMaxLevel } from './db.js';
 
 export default class CustomSet {
 	constructor(count = '') {
@@ -68,6 +68,19 @@ export default class CustomSet {
 	getSlots() {
 		let slots = [];
 		return slots;
+	}
+
+	static createSetFromIds(data) {
+		let set = new CustomSet();
+		set.name = data.name;
+		set.equipment.weapon = db.weapons.find(w => w.id === data.weapon);
+		set.equipment.head = db.armour.find(a => a.id === data.head);
+		set.equipment.chest = db.armour.find(a => a.id === data.chest);
+		set.equipment.gloves = db.armour.find(a => a.id === data.gloves);
+		set.equipment.waist = db.armour.find(a => a.id === data.waist);
+		set.equipment.legs = db.armour.find(a => a.id === data.legs);
+		set.equipment.charm = db.charms.find(c => c.id === data.charm);
+		return set;
 	}
 
 	static createSetFromData(data, count = '') {

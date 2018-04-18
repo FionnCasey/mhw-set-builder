@@ -13,7 +13,7 @@ export default class AutoComplete extends Component {
 	}
 
 	render() {
-		const { query, type, list, label = 'Name', isSkill = false } = this.props;
+		const { query, type, list, label = 'Name' } = this.props;
 
 		return(
 			<div>

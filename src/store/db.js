@@ -55,7 +55,8 @@ const loadEquipment = onDone => {
 		   skills.push({
 			   id: x.ranks[0].skill,
 			   name: x.name,
-			   ranks: x.ranks
+			   ranks: x.ranks,
+			   uniqueId: x.id
 		   });
 		});
 		db.skills = skills;

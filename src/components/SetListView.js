@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 
 import { SetListItem } from './SetListItem.js';
 import { BtnPrimary } from '../utils/customStyles.js';

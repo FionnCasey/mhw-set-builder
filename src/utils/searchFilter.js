@@ -3,7 +3,7 @@ import { db, getArmourType } from '../store/db.js';
 const filterArmourBySkills = required => {
     let results = [];
     db.armour.forEach(a => {
-        if (a.skills.find(s => required.find(r => s.id === r))) {
+        if (a.skills.find(s => required.find(r => s.skill === r))) {
             results.push(a);
         }
     });

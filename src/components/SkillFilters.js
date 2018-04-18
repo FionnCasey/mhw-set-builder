@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Label, FormControl, Glyphicon } from 'react-bootstrap';
+import { Label, Glyphicon } from 'react-bootstrap';
 
 import { BtnGlyph } from '../utils/customStyles.js';
 import AutoComplete from './AutoComplete.js';
@@ -34,12 +34,11 @@ export default class SkillFilter extends Component {
 	render() {
 		const filters = this.props.filters.map((r, i) => {
 			return (
-				<Label key={i} style={{ display: 'inline-block', cursor: 'pointer' }}
-					bsStyle="info"
+				<Label key={i} style={{ display: 'inline-block', cursor: 'pointer', background: '#243743' }}
 					onClick={() => this.removeFilter(r.id)}
 				>
 					{r.name}
-					<Glyphicon glyph="minus" style={{ marginLeft: 3 }}/>
+					<Glyphicon glyph="minus" style={{ marginLeft: 4 }}/>
 				</Label>
 			);
 		});
@@ -57,11 +56,10 @@ export default class SkillFilter extends Component {
 
 		return (
 			<div>
-				<h4>Skill Filters</h4>
+				<h4>Skill Filters {BtnGlyph('plus', this.activateInput)}</h4>
 				<ul style={{ display: 'inline-block' }}>
 					{filters.length > 0 ? filters : 'None'}
 					<li style={{ display: 'inline-block' }}>{input}</li>
-					<li style={{ display: 'inline-block' }}>{BtnGlyph('plus', this.activateInput)}</li>
 				</ul>
 			</div>
 		);

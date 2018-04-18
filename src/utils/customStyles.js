@@ -5,6 +5,7 @@ import React from 'react';
 bootstrapUtils.addStyle(Button, 'primary');
 bootstrapUtils.addStyle(Button, 'secondary');
 bootstrapUtils.addStyle(Button, 'glyph');
+bootstrapUtils.addStyle(Button, 'dropdown');
 
 const BtnPrimary = (text, onClick, size = 'small', float = 'right') => (
 	<div style={{ display: 'inline-block', float: float }}>
@@ -46,22 +47,22 @@ const BtnGlyph = (glyph, onClick, text = '', size = 'xsmall', float = 'none') =>
 	<div style={{ display: 'inline-block', float: float }}>
 	    <style type="text/css">{`
 	    .btn-glyph {
-	        background-color: #ffae00 !important;
+	        background-color: #243743 !important;
 	        color: white;
 			border: none;
 			border-radius: 50%;
 			width: 20px;
 			height: 20px;
-			padding: 0;
+			padding: 1px;
 	    }
 		.btn-glyph:hover {
-	        background-color: #ffae00;
+	        background-color: #243743;
 	        color: white;
 	    }
 	    `}</style>
 		<Button onClick={() => onClick()} bsSize={size} bsStyle="glyph">
 			{text}
-			<Glyphicon glyph={glyph} style={{ color: 'white', padding: 0 }}/>
+			<Glyphicon glyph={glyph} style={{ color: 'white' }}/>
 		</Button>
   	</div>
 );

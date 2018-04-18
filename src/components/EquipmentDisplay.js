@@ -39,7 +39,7 @@ const WeaponDisplay = ({ weapon, edit }) => {
 					<li>Affinity: {affinity}%</li>
 				</ul>
 				<div style={{ display: 'inline-block', float: 'right', marginTop: -10 }}>
-					<SharpnessBar weapon={weapon} />
+					{ weapon.attributes.sharpnessRed ? <SharpnessBar weapon={weapon} /> : null }
 				</div>
 			</ListGroupItem>
 		);
@@ -75,7 +75,7 @@ const ArmourDisplay = ({ armour, type, edit }) => {
 			return <SkillLevels key={i} name={titleCase(x.name)} lvl={x.level} maxLvl={maxLvl}/>;
 		});
 
-		const bgColour = rarityColours[armour.rarity];
+		const bgColour = type !== 'charm' ? rarityColours[armour.rarity] : '#f44f5a';
 
 		return (
 			<ListGroupItem style={{ paddingBottom: 5 }} onClick={() => edit(type, armour)}>

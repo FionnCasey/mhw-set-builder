@@ -251,9 +251,77 @@ h4 {
     width: 100%;
     border-radius: 5px;
     z-index: 9;
+    color: gray !important;
 }
 
 .text-input {
     height: 28px;
     color: gray;
+}
+
+.btn-dropdown {
+    background-color: #ffae00 !important;
+    color: white;
+    border: none;
+    width: 20px;
+    height: 20px;
+    padding: 0px;
+    border-radius: 5px;
+    margin: 0 5px 2px 0;
+}
+
+.btn-dropdown:hover {
+    background-color: green;
+    color: white;
+}
+
+.register {
+    background-color: #ffa335 !important;
+    color: white;
+    border: none;
+    width: 100px;
+}
+.register:hover {
+    background-color: #ffa335;
+    color: white;
+}
+
+.login {
+    background-color: #f44f5a !important;
+    color: white;
+    border: none;
+    width: 100px;
+}
+.login:hover {
+    background-color: #f44f5a;
+    color: white;
+}
+
+.result-list li {
+    padding-top: 2px;
+}
+
+.results-group:hover {
+    border-left: 3px solid #ffae00;
+    border-right: 3px solid #ffae00;
+}
+
+.result-list {
+    display: inline-block;
+}
+
+th {
+    min-width: 120px;
+}
+
+td {
+    text-align: left;
+}
+
+.editable {
+    cursor:pointer;
+}
+
+.editable:hover {
+    color: #ffae00;
 }
