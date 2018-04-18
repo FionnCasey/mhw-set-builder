@@ -75,6 +75,9 @@ class App extends Component {
                         <Route path="/generate" component={() =>
                             <Generate user={this.state.user} />
                         }/>
+                        <Route exact path="/" component={() =>
+                            <Generate user={this.state.user} />
+                        }/>
                     </Grid>
                 </div>
             </BrowserRouter>
